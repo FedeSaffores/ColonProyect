@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:colon_proyect_flutter/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,7 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> _register() async {
     final response = await http.post(
-      Uri.parse("http://10.0.2.2:8000/api/register"),
+      Uri.parse("http://192.168.1.15:8000/api/register"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -35,6 +36,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (response.statusCode == 201) {
       final Map<String, dynamic> responseData = json.decode(response.body);
       print('User registered: ${responseData['user']}');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
     } else {
       print('Failed to register: ${response.body}');
     }

@@ -3,7 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfessionalController;
 
+
+Route::get('/professionals',[ProfessionalController::class, 'index']);
+Route::post('/create_professional',[AuthController::class, 'registerProfessional']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 

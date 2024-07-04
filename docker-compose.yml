@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  backend:
+    platform: linux/arm64/v8
+    build:
+      context: ./backend-proyect
+      dockerfile: Dockerfile
+    container_name: backend-container
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend-proyect:/var/www/html
+    networks:
+      - app-network
+    environment:
+      - MYSQL_DATABASE=colonproyect
+      - MYSQL_USER=root
+      - DB_HOST=db
+      - DB_CONNECTION=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=colonproyect
+      - DB_USERNAME=root
+      - DB_PASSWORD= 
+      
+
+
+  db:
+    platform: linux/amd64/v8
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: colonproyect
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+
+  flutter:
+    platform: linux/arm64/v8
+    build:
+      context: ./colon_proyect_flutter
+      dockerfile: Dockerfile
+    container_name: flutter-container
+    ports:
+      - "8081:80"
+    networks:
+      - app-network
+
+volumes:
+  db-data:
+
+networks:
+  app-network:
+
+
