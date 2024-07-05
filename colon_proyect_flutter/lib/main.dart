@@ -1,6 +1,7 @@
 import 'package:colon_proyect_flutter/screens/create_professional.dart';
 import 'package:colon_proyect_flutter/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 // import 'package:firebase_core/firebase_core.dart';
@@ -34,31 +35,66 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Colon Proyect')),
-        body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                );
-              },
-              child: const Text('Log in'),
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Color.fromARGB(255, 0, 0, 0),
+            bottom: const TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.person)),
+                Tab(icon: Icon(Icons.work)),
+              ],
+              unselectedLabelColor: Color.fromARGB(255, 108, 176, 232),
             ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RegisterProfessionalForm()),
-                );
-              },
-              child: const Text('Register Professional'),
-            )
-          ]),
+            title: const Text('Seleccione una opción'),
+            centerTitle: true,
+            titleTextStyle: const TextStyle(
+              color: Color.fromARGB(255, 232, 126, 126),
+              fontSize: 20,
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
+                    },
+                    child: const Text('Log in'),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 182, 170, 202),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 20),
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    )),
+              ),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterProfessionalForm()),
+                      );
+                    },
+                    child: const Text('Register Professional'),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 182, 170, 202),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 20),
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    )),
+              ),
+            ],
+          ),
         ),
       ),
     );
