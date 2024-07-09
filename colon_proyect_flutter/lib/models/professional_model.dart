@@ -47,12 +47,12 @@ class Professional {
 
   factory Professional.fromJson(Map<String, dynamic> json) {
     return Professional(
-      id: json['user']['id'] ?? 0,
+      id: json['id'] ?? 0,
       userId: json['user_id'] ?? 0,
-      profilePicture: json['profilePicture'] as String?,
-      address: json['professional']['address'] ?? '',
-      profession: json['professional']['profession'] ?? '',
-      yearsOfExperience: json['professional']['years_of_experience'] as int?,
+      profilePicture: json['profile_picture'] as String?,
+      address: json['address'] ?? '',
+      profession: json['profession'] ?? '',
+      yearsOfExperience: json['years_of_experience'] as int?,
       user: User.fromJson(json['user'] ?? {}),
     );
   }
